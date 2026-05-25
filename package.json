@@ -3,11 +3,54 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "main": "electron/main.cjs",
+  "description": "Suite produktivitas lokal dengan catatan tempel, brankas kata sandi, dan enkripsi teks",
+  "author": "sindufha",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:dev": "vite build && electron .",
+    "electron:build": "vite build && electron-builder --win",
+    "electron:build:linux": "vite build && electron-builder --linux",
+    "electron:build:mac": "vite build && electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.bloom.notes",
+    "productName": "Bloom Notes",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "public/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "public/bloom.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false,
+      "installerIcon": "public/bloom.ico",
+      "uninstallerIcon": "public/bloom.ico",
+      "installerHeaderIcon": "public/bloom.ico"
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "icon": "public/bloom-512.png"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "public/bloom-512.png"
+    }
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -29,6 +72,8 @@
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1",
     "eslint": "^9.15.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
