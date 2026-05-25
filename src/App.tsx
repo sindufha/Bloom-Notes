@@ -3,6 +3,7 @@ import {
   Flower2,
   StickyNote,
   KeyRound,
+  Lock,
   Download,
   Menu,
   X,
@@ -12,6 +13,7 @@ import { usePwaInstall } from "./hooks/usePwaInstall";
 import Home from "./pages/Home";
 import StickyNotes from "./pages/StickyNotes";
 import PasswordVault from "./pages/PasswordVault";
+import TextEncryption from "./pages/TextEncryption";
 import "./App.css";
 
 const appName = import.meta.env.VITE_APP_NAME || "Bloom";
@@ -40,6 +42,10 @@ function Navbar() {
       <NavLink to="/brankas" className={linkClass} onClick={() => setMobileOpen(false)}>
         <KeyRound className="h-4 w-4" strokeWidth={2.5} />
         Brankas
+      </NavLink>
+      <NavLink to="/enkripsi" className={linkClass} onClick={() => setMobileOpen(false)}>
+        <Lock className="h-4 w-4" strokeWidth={2.5} />
+        Enkripsi
       </NavLink>
     </>
   );
@@ -109,6 +115,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/catatan" element={<StickyNotes />} />
             <Route path="/brankas" element={<PasswordVault />} />
+            <Route path="/enkripsi" element={<TextEncryption />} />
           </Routes>
         </main>
       </div>
