@@ -227,7 +227,7 @@ export default function PasswordVault() {
     return (
       <div className="max-w-md mx-auto px-6 py-20">
         <div className="bg-white border-3 border-ink rounded-blob p-8 shadow-cartoon-lg text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-lavender border-3 border-ink rounded-full shadow-cartoon-sm mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-lavender border-3 border-ink rounded-full shadow-cartoon-sm mb-6 animate-float">
             <Lock className="h-7 w-7 text-ink" />
           </div>
           <h1 className="font-display font-bold text-3xl mb-2">Brankas Kata Sandi</h1>
@@ -286,7 +286,7 @@ export default function PasswordVault() {
     <div className="max-w-4xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-display font-bold text-4xl">Brankas Kata Sandi</h1>
+          <h1 className="font-display font-bold text-4xl animate-fade-in-up">Brankas Kata Sandi</h1>
           <p className="font-body text-ink/70 mt-1">
             {entries.length} kredensial tersimpan — terenkripsi lokal.
           </p>
