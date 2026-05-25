@@ -45,13 +45,13 @@ export default function Home() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <section className="text-center py-12">
-        <div className="inline-flex items-center gap-2 bg-white border-3 border-ink rounded-full px-4 py-1.5 shadow-cartoon-sm mb-6">
-          <Sparkles className="h-4 w-4 text-bubblegum" strokeWidth={3} />
+        <div className="inline-flex items-center gap-2 bg-white border-3 border-ink rounded-full px-4 py-1.5 shadow-cartoon-sm mb-6 animate-fade-in-up">
+          <Sparkles className="h-4 w-4 text-bubblegum animate-pulse-soft" strokeWidth={3} />
           <span className="font-display text-sm font-semibold">
             100% lokal — data Anda tidak pernah keluar dari perangkat
           </span>
         </div>
-        <h1 className="font-display font-bold text-5xl sm:text-6xl leading-[1.05] tracking-tight">
+        <h1 className="font-display font-bold text-5xl sm:text-6xl leading-[1.05] tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           Kotak peralatan
           <br />
           <span className="relative inline-block">
@@ -59,7 +59,7 @@ export default function Home() {
             <span className="absolute inset-x-0 bottom-1 h-4 bg-mint -z-0 rounded-full" />
           </span>
         </h1>
-        <p className="mt-6 text-lg sm:text-xl font-body text-ink/80 max-w-xl mx-auto">
+        <p className="mt-6 text-lg sm:text-xl font-body text-ink/80 max-w-xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
           Catatan tempel dan brankas kata sandi yang sepenuhnya berjalan di
           peramban. Tanpa akun. Tanpa awan. Murni milik Anda.
         </p>
@@ -70,7 +70,8 @@ export default function Home() {
           <Link
             key={card.to}
             to={card.to}
-            className={`group ${card.bg} ${card.tilt} border-3 border-ink rounded-blob p-7 shadow-cartoon-lg hover:rotate-0 hover:-translate-y-1 transition-all duration-300`}
+            className={`group ${card.bg} ${card.tilt} border-3 border-ink rounded-blob p-7 shadow-cartoon-lg hover:rotate-0 hover:-translate-y-1 transition-all duration-300 animate-pop-in`}
+            style={{ animationDelay: `${0.15 * (cards.indexOf(card) + 1)}s` }}
           >
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl border-3 border-ink shadow-cartoon-sm mb-5">
               {card.icon}
@@ -84,7 +85,7 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="bg-white border-3 border-ink rounded-blob p-8 shadow-cartoon max-w-3xl mx-auto mb-16">
+      <section className="bg-white border-3 border-ink rounded-blob p-8 shadow-cartoon max-w-3xl mx-auto mb-16 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
         <h2 className="font-display font-bold text-2xl mb-6 text-center">
           Cara kerjanya
         </h2>

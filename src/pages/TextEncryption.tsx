@@ -89,7 +89,7 @@ export default function TextEncryption() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
       <div className="mb-8">
-        <h1 className="font-display font-bold text-4xl">Enkripsi Teks</h1>
+        <h1 className="font-display font-bold text-4xl animate-fade-in-up">Enkripsi Teks</h1>
         <p className="font-body text-ink/70 mt-1">
           Enkripsi atau dekripsi teks langsung di peramban Anda. AES-256-GCM
           dengan kunci yang diturunkan via PBKDF2-SHA256 (600.000 iterasi) dan

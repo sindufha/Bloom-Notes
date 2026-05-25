@@ -75,7 +75,7 @@ export default function StickyNotes() {
     <div className="max-w-6xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-display font-bold text-4xl">Catatan Tempel</h1>
+          <h1 className="font-display font-bold text-4xl animate-fade-in-up">Catatan Tempel</h1>
           <p className="font-body text-ink/70 mt-1">
             Catatan warna-warni yang disimpan langsung di peramban Anda.
           </p>
@@ -128,7 +128,7 @@ export default function StickyNotes() {
 
       {notes.length === 0 && !showNew && (
         <div className="text-center py-20">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-sunny border-3 border-ink rounded-full shadow-cartoon-sm mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-sunny border-3 border-ink rounded-full shadow-cartoon-sm mb-4 animate-float">
             <Pencil className="h-8 w-8 text-ink" />
           </div>
           <p className="font-display text-xl font-semibold text-ink/60">
@@ -143,7 +143,8 @@ export default function StickyNotes() {
             key={note.id}
             className={`${note.color} border-3 border-ink rounded-blob p-5 shadow-cartoon ${
               tiltClasses[i % tiltClasses.length]
-            } hover:rotate-0 transition-transform duration-200`}
+            } hover:rotate-0 transition-transform duration-200 animate-pop-in`}
+            style={{ animationDelay: `${i * 0.06}s` }}
           >
             {editingId === note.id ? (
               <>
