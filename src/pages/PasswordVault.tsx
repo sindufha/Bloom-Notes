@@ -21,12 +21,59 @@ type VaultEntry = {
   username: string;
   password: string;
   notes: string;
+  category: string;
   createdAt: number;
 };
 
 const VAULT_KEY = "bloom-password-vault";
 const VAULT_CHECK_KEY = "bloom-vault-check";
 const VAULT_CHECK_VALUE = "bloom-vault-ok";
+
+const CATEGORIES: { value: string; label: string; color: string }[] = [
+  { value: "lainnya", label: "Lainnya", color: "bg-cream" },
+  { value: "instagram", label: "Instagram", color: "bg-bubblegum/40" },
+  { value: "facebook", label: "Facebook", color: "bg-sky/60" },
+  { value: "x", label: "X", color: "bg-ink/10" },
+  { value: "twitter", label: "Twitter", color: "bg-sky/60" },
+  { value: "gmail", label: "Gmail", color: "bg-bubblegum/30" },
+  { value: "google", label: "Google", color: "bg-sunny/60" },
+  { value: "yahoo", label: "Yahoo", color: "bg-lavender" },
+  { value: "outlook", label: "Outlook", color: "bg-sky/60" },
+  { value: "linkedin", label: "LinkedIn", color: "bg-sky/60" },
+  { value: "github", label: "GitHub", color: "bg-ink/10" },
+  { value: "gitlab", label: "GitLab", color: "bg-sunny/60" },
+  { value: "discord", label: "Discord", color: "bg-lavender" },
+  { value: "telegram", label: "Telegram", color: "bg-sky/60" },
+  { value: "whatsapp", label: "WhatsApp", color: "bg-mint" },
+  { value: "tiktok", label: "TikTok", color: "bg-ink/10" },
+  { value: "youtube", label: "YouTube", color: "bg-bubblegum/40" },
+  { value: "spotify", label: "Spotify", color: "bg-mint" },
+  { value: "netflix", label: "Netflix", color: "bg-bubblegum/40" },
+  { value: "snapchat", label: "Snapchat", color: "bg-sunny/60" },
+  { value: "pinterest", label: "Pinterest", color: "bg-bubblegum/40" },
+  { value: "reddit", label: "Reddit", color: "bg-sunny/60" },
+  { value: "twitch", label: "Twitch", color: "bg-lavender" },
+  { value: "shopee", label: "Shopee", color: "bg-sunny/60" },
+  { value: "tokopedia", label: "Tokopedia", color: "bg-mint" },
+  { value: "bukalapak", label: "Bukalapak", color: "bg-bubblegum/40" },
+  { value: "lazada", label: "Lazada", color: "bg-sky/60" },
+  { value: "dana", label: "DANA", color: "bg-sky/60" },
+  { value: "gopay", label: "GoPay", color: "bg-mint" },
+  { value: "ovo", label: "OVO", color: "bg-lavender" },
+  { value: "paypal", label: "PayPal", color: "bg-sky/60" },
+  { value: "apple", label: "Apple ID", color: "bg-ink/10" },
+  { value: "microsoft", label: "Microsoft", color: "bg-sky/60" },
+  { value: "amazon", label: "Amazon", color: "bg-sunny/60" },
+  { value: "steam", label: "Steam", color: "bg-ink/10" },
+  { value: "epicgames", label: "Epic Games", color: "bg-ink/10" },
+  { value: "perbankan", label: "Perbankan", color: "bg-mint" },
+  { value: "kantor", label: "Kantor", color: "bg-cream" },
+  { value: "sekolah", label: "Sekolah", color: "bg-cream" },
+];
+
+function getCategory(value: string) {
+  return CATEGORIES.find((c) => c.value === value) || CATEGORIES[0];
+}
 
 export default function PasswordVault() {
   const [masterPassword, setMasterPassword] = useState("");
@@ -38,6 +85,7 @@ export default function PasswordVault() {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newNotes, setNewNotes] = useState("");
+  const [newCategory, setNewCategory] = useState("lainnya");
   const [visiblePasswords, setVisiblePasswords] = useState<Set<string>>(new Set());
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isFirstTime, setIsFirstTime] = useState(false);
@@ -97,7 +145,17 @@ export default function PasswordVault() {
       const raw = localStorage.getItem(VAULT_KEY);
       if (raw) {
         const json = await decrypt(raw, masterPassword);
-        setEntries(JSON.parse(json));
+        const parsed = JSON.parse(json) as Partial<VaultEntry>[];
+        const normalized: VaultEntry[] = parsed.map((e) => ({
+          id: e.id ?? uuidv4(),
+          site: e.site ?? "",
+          username: e.username ?? "",
+          password: e.password ?? "",
+          notes: e.notes ?? "",
+          category: e.category ?? "lainnya",
+          createdAt: e.createdAt ?? Date.now(),
+        }));
+        setEntries(normalized);
       }
       setIsUnlocked(true);
     } catch {
@@ -122,6 +180,7 @@ export default function PasswordVault() {
       username: newUsername.trim(),
       password: newPassword.trim(),
       notes: newNotes.trim(),
+      category: newCategory,
       createdAt: Date.now(),
     };
     const updated = [entry, ...entries];
@@ -131,6 +190,7 @@ export default function PasswordVault() {
     setNewUsername("");
     setNewPassword("");
     setNewNotes("");
+    setNewCategory("lainnya");
     setShowNew(false);
   };
 
@@ -173,7 +233,7 @@ export default function PasswordVault() {
           <h1 className="font-display font-bold text-3xl mb-2">Brankas Kata Sandi</h1>
           <p className="font-body text-ink/60 mb-6">
             {isFirstTime
-              ? "Buat kata sandi utama untuk melindungi brankasmu."
+              ? "Buat kata sandi utama untuk melindungi brankas Anda."
               : "Masukkan kata sandi utama untuk membuka brankas."}
           </p>
 
@@ -214,7 +274,7 @@ export default function PasswordVault() {
           <div className="mt-6 flex items-center gap-2 justify-center text-ink/40">
             <Shield className="h-4 w-4" />
             <span className="font-body text-xs">
-              Dienkripsi lokal dengan AES-256-GCM. Datamu tidak pernah keluar dari perangkat ini.
+              Dienkripsi lokal dengan AES-256-GCM. Data Anda tidak pernah keluar dari perangkat ini.
             </span>
           </div>
         </div>
@@ -251,6 +311,20 @@ export default function PasswordVault() {
       {showNew && (
         <div className="bg-white border-3 border-ink rounded-blob p-6 shadow-cartoon-lg mb-8 max-w-lg">
           <h3 className="font-display font-bold text-xl mb-4">Kredensial baru</h3>
+          <label className="block font-display font-semibold text-sm mb-1.5">
+            Label akun
+          </label>
+          <select
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            className="w-full px-4 py-2.5 font-body bg-cream border-3 border-ink rounded-2xl outline-none focus:shadow-cartoon-sm transition-shadow mb-3"
+          >
+            {CATEGORIES.map((c) => (
+              <option key={c.value} value={c.value}>
+                {c.label}
+              </option>
+            ))}
+          </select>
           <input
             type="text"
             placeholder="Nama situs atau layanan"
@@ -302,7 +376,7 @@ export default function PasswordVault() {
             <KeyRound className="h-8 w-8 text-ink" />
           </div>
           <p className="font-display text-xl font-semibold text-ink/60">
-            Brankasmu masih kosong. Yuk, tambahkan kredensial pertamamu!
+            Brankas Anda masih kosong. Silakan tambahkan kredensial pertama.
           </p>
         </div>
       )}
@@ -315,7 +389,14 @@ export default function PasswordVault() {
           >
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
-                <h3 className="font-display font-bold text-lg">{entry.site}</h3>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-display font-bold text-lg">{entry.site}</h3>
+                  <span
+                    className={`inline-flex items-center font-display font-semibold text-xs px-2.5 py-0.5 rounded-full border-2 border-ink ${getCategory(entry.category).color}`}
+                  >
+                    {getCategory(entry.category).label}
+                  </span>
+                </div>
                 {entry.username && (
                   <p className="font-body text-sm text-ink/60 mt-0.5">{entry.username}</p>
                 )}
