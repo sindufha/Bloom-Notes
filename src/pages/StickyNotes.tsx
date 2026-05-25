@@ -77,7 +77,7 @@ export default function StickyNotes() {
         <div>
           <h1 className="font-display font-bold text-4xl">Catatan Tempel</h1>
           <p className="font-body text-ink/70 mt-1">
-            Catatan warna-warni yang disimpan langsung di peramban kamu.
+            Catatan warna-warni yang disimpan langsung di peramban Anda.
           </p>
         </div>
         <button

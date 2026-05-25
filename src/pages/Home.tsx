@@ -2,6 +2,7 @@ import {
   ArrowRight,
   StickyNote,
   KeyRound,
+  Lock,
   Shield,
   Wifi,
   WifiOff,
@@ -16,7 +17,7 @@ const cards = [
     icon: <StickyNote className="h-10 w-10" strokeWidth={2.5} />,
     title: "Catatan Tempel",
     description:
-      "Catatan warna-warni yang bisa kamu tempel, sunting, dan hapus. Cocok untuk ide singkat dan daftar tugas.",
+      "Catatan warna-warni yang bisa Anda tempel, sunting, dan hapus. Cocok untuk ide singkat dan daftar tugas.",
     bg: "bg-sunny",
     tilt: "-rotate-2",
   },
@@ -25,9 +26,18 @@ const cards = [
     icon: <KeyRound className="h-10 w-10" strokeWidth={2.5} />,
     title: "Brankas Kata Sandi",
     description:
-      "Simpan kredensialmu dengan aman pakai enkripsi AES-256. Dilindungi kata sandi utama buatanmu.",
+      "Simpan kredensial Anda dengan aman memakai enkripsi AES-256. Dilengkapi label akun seperti Instagram, Gmail, X, dan lain-lain.",
     bg: "bg-lavender",
     tilt: "rotate-2",
+  },
+  {
+    to: "/enkripsi",
+    icon: <Lock className="h-10 w-10" strokeWidth={2.5} />,
+    title: "Enkripsi Teks",
+    description:
+      "Enkripsi dan dekripsi teks rahasia secara luring memakai AES-256-GCM, PBKDF2-SHA256, serta salt acak per pesan.",
+    bg: "bg-mint",
+    tilt: "-rotate-1",
   },
 ];
 
@@ -38,7 +48,7 @@ export default function Home() {
         <div className="inline-flex items-center gap-2 bg-white border-3 border-ink rounded-full px-4 py-1.5 shadow-cartoon-sm mb-6">
           <Sparkles className="h-4 w-4 text-bubblegum" strokeWidth={3} />
           <span className="font-display text-sm font-semibold">
-            100% lokal — datamu tidak pernah keluar dari perangkat
+            100% lokal — data Anda tidak pernah keluar dari perangkat
           </span>
         </div>
         <h1 className="font-display font-bold text-5xl sm:text-6xl leading-[1.05] tracking-tight">
@@ -51,7 +61,7 @@ export default function Home() {
         </h1>
         <p className="mt-6 text-lg sm:text-xl font-body text-ink/80 max-w-xl mx-auto">
           Catatan tempel dan brankas kata sandi yang sepenuhnya berjalan di
-          peramban. Tanpa akun. Tanpa awan. Murni milikmu.
+          peramban. Tanpa akun. Tanpa awan. Murni milik Anda.
         </p>
       </section>
 
@@ -88,7 +98,7 @@ export default function Home() {
             {
               icon: <Shield className="h-6 w-6" />,
               title: "Terenkripsi",
-              text: "Brankas memakai AES-256-GCM dengan kata sandi utamamu. Tanpa pintu belakang.",
+              text: "Brankas memakai AES-256-GCM dengan kata sandi utama Anda. Tanpa pintu belakang.",
             },
             {
               icon: <Wifi className="h-6 w-6" />,
@@ -115,7 +125,7 @@ export default function Home() {
           <span className="font-display text-lg font-bold">Bloom</span>
         </div>
         <p className="font-body text-sm text-ink/40">
-          Dibuat dengan teliti. Semua data tetap di perangkatmu.
+          Dibuat dengan teliti. Semua data tetap di perangkat Anda.
         </p>
       </footer>
     </div>
