@@ -6,8 +6,9 @@ const IV_LEN = 12;
 const TEXT_PREFIX = "BLOOMv1:";
 
 function getEnvSalt(): Uint8Array {
-  const hex = import.meta.env.VITE_VAULT_SALT ?? "";
-  if (!hex || hex === "ganti_dengan_string_hex_acakmu") {
+  const hex = (import.meta.env.VITE_VAULT_SALT ?? "").trim();
+  const isHex = /^[0-9a-fA-F]+$/.test(hex) && hex.length % 2 === 0;
+  if (!hex || !isHex) {
     return new TextEncoder().encode("bloom-default-salt-change-me");
   }
   const bytes = new Uint8Array(hex.length / 2);
